@@ -214,10 +214,10 @@ func (s *darwinLaunchdService) Uninstall() error {
 		return fmt.Errorf("File: %s", err)
 	}
 
-	//err = s.Stop()
-	//if err != nil {
-	//	return fmt.Errorf("Stop: %s", err)
-	//}
+	err = s.i.Stop(s)
+	if err != nil {
+		return fmt.Errorf("Stop: %s", err)
+	}
 
 	return nil
 }
