@@ -209,15 +209,19 @@ func (s *darwinLaunchdService) Uninstall() error {
 		return fmt.Errorf("Path: %s", err)
 	}
 
+	done := make(chan struct{})
+	go func() {
+		defer close(done)
+		time.Sleep(100 * time.Millisecond)
+		os.Remove(confPath)
+	}()
+
 	err = s.Stop()
 	if err != nil {
 		return fmt.Errorf("Stop: %s", err)
 	}
 
-	go func() {
-		time.Sleep(100 * time.Millisecond)
-		os.Remove(confPath)
-	}()
+	<-done
 
 	return nil
 }
