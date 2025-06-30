@@ -206,18 +206,18 @@ func (s *darwinLaunchdService) Install() error {
 func (s *darwinLaunchdService) Uninstall() error {
 	confPath, err := s.getServiceFilePath()
 	if err != nil {
-		return err
-	}
-
-	err = os.Remove(confPath)
-	if err != nil {
-		return err
+		return fmt.Errorf("Path: %s", err)
 	}
 
 	err = s.Stop()
 	if err != nil {
-		return err
+		return fmt.Errorf("Stop: %s", err)
 	}
+
+	go func() {
+		time.Sleep(100 * time.Millisecond)
+		os.Remove(confPath)
+	}()
 
 	return nil
 }
