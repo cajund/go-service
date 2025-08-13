@@ -5,11 +5,10 @@
 package service_test
 
 import (
+	"github.com/cajund/go-service"
 	"os"
 	"testing"
 	"time"
-
-	"github.com/kardianos/service"
 )
 
 func TestRunInterrupt(t *testing.T) {
