@@ -324,7 +324,8 @@ StandardError=file:{{.LogDirectory}}/{{.Name}}.err
 {{if .Restart}}Restart={{.Restart}}{{end}}
 {{if .SuccessExitStatus}}SuccessExitStatus={{.SuccessExitStatus}}{{end}}
 RestartSec=120
-EnvironmentFile=-/etc/sysconfig/{{.Name}}
+#EnvironmentFile=-/etc/sysconfig/{{.Name}}
+#Environment="DEBUG=1"
 
 {{range $k, $v := .EnvVars -}}
 Environment={{$k}}={{$v}}
